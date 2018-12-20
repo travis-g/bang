@@ -1,0 +1,26 @@
+{
+  "bi": {
+    "description": "Bing Images",
+    "format": "https://www.bing.com/images/search?q=%s"
+  },
+  "gh": {
+    "description": "GitHub",
+    "format": "https://github.com/search?q=%s"
+  },
+  "gi": {
+    "description": "Google Images",
+    "format": "https://www.google.com/search?tbm=isch&q=%s"
+  },
+  "r": {
+    "description": "Reddit",
+    "format": "https://www.reddit.com/search?q=%s"
+  },
+  "reddits": {
+    "description": "Reddit subreddit",
+    "format": "https://www.reddit.com/r/%s"
+  },
+  "w": {
+    "description": "WikiPedia",
+    "format": "https://wikipedia.org/wiki/Special:Search/%s"
+  }
+}
