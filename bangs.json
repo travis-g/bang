@@ -3,6 +3,14 @@
     "description": "Bing Images",
     "format": "https://www.bing.com/images/search?q=%s"
   },
+  "bingimages": {
+    "description": "Bing Images",
+    "format": "https://www.bing.com/images/search?q=%s"
+  },
+  "g": {
+    "description": "Google",
+    "format": "https://www.google.com/search?q=%s"
+  },
   "gh": {
     "description": "GitHub",
     "format": "https://github.com/search?q=%s"
@@ -11,6 +19,18 @@
     "description": "Google Images",
     "format": "https://www.google.com/search?tbm=isch&q=%s"
   },
+  "google": {
+    "description": "Google",
+    "format": "https://www.google.com/search?q=%s"
+  },
+  "gri": {
+    "description": "Google Reverse Image Search",
+    "format": "http://www.google.com/searchbyimage?image_url=%s"
+  },
+  "imgops": {
+    "description": "Image Operations Meta-tool",
+    "format": "https://imgops.com/%s"
+  },
   "r": {
     "description": "Reddit",
     "format": "https://www.reddit.com/search?q=%s"
@@ -18,6 +38,10 @@
   "reddits": {
     "description": "Reddit subreddit",
     "format": "https://www.reddit.com/r/%s"
+  },
+  "rgi": {
+    "description": "Google Reverse Image Search",
+    "format": "http://www.google.com/searchbyimage?image_url=%s"
   },
   "w": {
     "description": "WikiPedia",
