@@ -1,50 +1,86 @@
 {
+  "4ch": {
+    "description": "4chan Boards",
+    "format": "https://boards.4chan.org/{{{s}}}"
+  },
+  "a": {
+    "description": "Amazon.com",
+    "format": "https://www.amazon.com/s/?tag=duc0c-20&url=search-alias%3Daps&field-keywords={{{s}}}"
+  },
   "bi": {
     "description": "Bing Images",
-    "format": "https://www.bing.com/images/search?q=%s"
+    "format": "https://www.bing.com/images/search?q={{{s}}}"
   },
   "bingimages": {
     "description": "Bing Images",
-    "format": "https://www.bing.com/images/search?q=%s"
+    "format": "https://www.bing.com/images/search?q={{{s}}}"
   },
   "g": {
     "description": "Google",
-    "format": "https://www.google.com/search?q=%s"
+    "format": "https://www.google.com/search?q={{{s}}}"
   },
   "gh": {
     "description": "GitHub",
-    "format": "https://github.com/search?q=%s"
+    "format": "https://github.com/search?q={{{s}}}"
   },
   "gi": {
     "description": "Google Images",
-    "format": "https://www.google.com/search?tbm=isch&q=%s"
+    "format": "https://www.google.com/search?tbm=isch&q={{{s}}}"
   },
   "google": {
     "description": "Google",
-    "format": "https://www.google.com/search?q=%s"
+    "format": "https://www.google.com/search?q={{{s}}}"
   },
   "gri": {
     "description": "Google Reverse Image Search",
-    "format": "http://www.google.com/searchbyimage?image_url=%s"
+    "format": "http://www.google.com/searchbyimage?image_url={{{s}}}"
+  },
+  "imdb": {
+    "description": "imdb",
+    "format": "http://www.imdb.com/find?s=all&q={{{s}}}"
   },
   "imgops": {
     "description": "Image Operations Meta-tool",
-    "format": "https://imgops.com/%s"
+    "format": "https://imgops.com/{{{s}}}"
+  },
+  "itch": {
+    "description": "itch.io",
+    "format": "https://itch.io/search?q={{{s}}}"
+  },
+  "picmonkey": {
+    "description": "Picmonkey Image Editor",
+    "format": "https://www.picmonkey.com/service?&_import={{{s}}}"
   },
   "r": {
     "description": "Reddit",
-    "format": "https://www.reddit.com/search?q=%s"
+    "format": "https://www.reddit.com/search?q={{{s}}}"
   },
   "reddits": {
     "description": "Reddit subreddit",
-    "format": "https://www.reddit.com/r/%s"
+    "format": "https://www.reddit.com/r/{{{s}}}"
   },
   "rgi": {
     "description": "Google Reverse Image Search",
-    "format": "http://www.google.com/searchbyimage?image_url=%s"
+    "format": "http://www.google.com/searchbyimage?image_url={{{s}}}"
+  },
+  "tvtropes": {
+    "description": "TV Tropes",
+    "format": "http://tvtropes.org/pmwiki/search_result.php?q={{{s}}}"
   },
   "w": {
     "description": "WikiPedia",
-    "format": "https://wikipedia.org/wiki/Special:Search/%s"
+    "format": "https://wikipedia.org/wiki/Special:Search/{{{s}}}"
+  },
+  "wa": {
+    "description": "Wolfram|Alpha",
+    "format": "https://www.wolframalpha.com/input/?i={{{s}}}"
+  },
+  "yri": {
+    "description": "Yandex Reverse Image",
+    "format": "https://yandex.com/images/search?rpt=imageview&img_url={{{s}}}"
+  },
+  "yt": {
+    "description": "YouTube",
+    "format": "https://www.youtube.com/results?search_query={{{s}}}"
   }
 }
