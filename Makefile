@@ -10,12 +10,8 @@ fmt-json:
 	@echo "--> Formatting JSON file"
 	jq -SM . bangs.json | awk 'BEGIN{RS="";getline<"-";print>ARGV[1]}' bangs.json
 
-bindata:
-	@echo "--> Generating static files"
-	go-bindata bangs.json
-
-build: bindata fmt
+build: fmt
 	@echo "--> Building"
 	go build -ldflags="-s -w"
 
-.PHONY: default build fmt fmt-json bindata
+.PHONY: default build fmt fmt-json
