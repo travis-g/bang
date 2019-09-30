@@ -7,13 +7,41 @@
     "description": "Amazon.com",
     "format": "https://www.amazon.com/s/?tag=duc0c-20&url=search-alias%3Daps&field-keywords={{{s}}}"
   },
+  "amazon": {
+    "description": "Amazon.com",
+    "format": "https://www.amazon.com/s/?tag=duc0c-20&url=search-alias%3Daps&field-keywords={{{s}}}"
+  },
+  "b": {
+    "description": "Bing",
+    "format": "https://www.bing.com/search?q={{{s}}}"
+  },
   "bi": {
+    "description": "Bing Images",
+    "format": "https://www.bing.com/images/search?q={{{s}}}"
+  },
+  "bing": {
+    "description": "Bing",
+    "format": "https://www.bing.com/search?q={{{s}}}"
+  },
+  "bingimg": {
     "description": "Bing Images",
     "format": "https://www.bing.com/images/search?q={{{s}}}"
   },
   "bingimages": {
     "description": "Bing Images",
     "format": "https://www.bing.com/images/search?q={{{s}}}"
+  },
+  "ddg": {
+    "description": "DuckDuckGo",
+    "format": "https://duckduckgo.com/?q={{{s}}}"
+  },
+  "ddgi": {
+    "description": "DuckDuckGo Images",
+    "format": "https://duckduckgo.com/?iax=images&ia=images&q={{{s}}}"
+  },
+  "duckduckgo": {
+    "description": "DuckDuckGo",
+    "format": "https://duckduckgo.com/?q={{{s}}}"
   },
   "g": {
     "description": "Google",
@@ -27,21 +55,38 @@
     "description": "Google Images",
     "format": "https://www.google.com/search?tbm=isch&q={{{s}}}"
   },
+  "github": {
+    "description": "GitHub",
+    "format": "https://github.com/search?q={{{s}}}"
+  },
   "google": {
     "description": "Google",
     "format": "https://www.google.com/search?q={{{s}}}"
+  },
+  "googlefonts": {
+    "description": "Google Fonts",
+    "format": "https://fonts.google.com/?query={{{s}}}"
+  },
+  "googleimages": {
+    "description": "Google Images",
+    "format": "https://www.google.com/search?tbm=isch&q={{{s}}}"
+  },
+  "googleimg": {
+    "description": "Google Image",
+    "format": "https://www.google.com/search?tbm=isch&q={{{s}}}"
   },
   "gri": {
     "description": "Google Reverse Image Search",
     "format": "http://www.google.com/searchbyimage?image_url={{{s}}}"
   },
   "imdb": {
-    "description": "imdb",
+    "description": "IMDB",
     "format": "http://www.imdb.com/find?s=all&q={{{s}}}"
   },
   "imgops": {
     "description": "Image Operations Meta-tool",
-    "format": "https://imgops.com/{{{s}}}"
+    "format": "https://imgops.com/{{{s}}}",
+    "unescaped": true
   },
   "itch": {
     "description": "itch.io",
@@ -55,13 +100,21 @@
     "description": "Reddit",
     "format": "https://www.reddit.com/search?q={{{s}}}"
   },
+  "reddit": {
+    "description": "Reddit",
+    "format": "https://www.reddit.com/search?q={{{s}}}"
+  },
   "reddits": {
-    "description": "Reddit subreddit",
+    "description": "Reddit Subreddit",
     "format": "https://www.reddit.com/r/{{{s}}}"
   },
   "rgi": {
     "description": "Google Reverse Image Search",
     "format": "http://www.google.com/searchbyimage?image_url={{{s}}}"
+  },
+  "steam": {
+    "description": "Steam",
+    "format": "https://store.steampowered.com/search/?term={{{s}}}"
   },
   "tvtropes": {
     "description": "TV Tropes",
@@ -75,8 +128,48 @@
     "description": "Wolfram|Alpha",
     "format": "https://www.wolframalpha.com/input/?i={{{s}}}"
   },
+  "wiki": {
+    "description": "WikiPedia",
+    "format": "https://wikipedia.org/wiki/Special:Search/{{{s}}}"
+  },
+  "wikipedia": {
+    "description": "WikiPedia",
+    "format": "https://wikipedia.org/wiki/Special:Search/{{{s}}}"
+  },
+  "wolfram": {
+    "description": "Wolfram|Alpha",
+    "format": "https://www.wolframalpha.com/input/?i={{{s}}}"
+  },
+  "ya": {
+    "description": "Yandex",
+    "format": "https://yandex.com/search/?text={{{s}}}"
+  },
+  "yahoo": {
+    "description": "Yahoo",
+    "format": "https://search.yahoo.com/search?p={{{s}}}"
+  },
+  "yandex": {
+    "description": "Yandex",
+    "format": "https://yandex.com/search/?text={{{s}}}"
+  },
+  "yandeximages": {
+    "description": "Yandex.Images",
+    "format": "https://yandex.com/images/search?text=cats"
+  },
+  "yandeximg": {
+    "description": "Yandex.Images",
+    "format": "https://yandex.com/images/search?text=cats"
+  },
+  "yi": {
+    "description": "Yandex.Images",
+    "format": "https://yandex.com/images/search?text=cats"
+  },
+  "youtube": {
+    "description": "YouTube",
+    "format": "https://www.youtube.com/results?search_query={{{s}}}"
+  },
   "yri": {
-    "description": "Yandex Reverse Image",
+    "description": "Yandex Reverse Image Search",
     "format": "https://yandex.com/images/search?rpt=imageview&img_url={{{s}}}"
   },
   "yt": {

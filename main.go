@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"net/url"
+	"io/ioutil"
 	"os"
 	"os/exec"
 	"strings"
@@ -38,6 +38,7 @@ func loadFlags(fs *flag.FlagSet) {
 	fs.Parse(os.Args[1:])
 }
 
+// TODO: make exported
 func launch(url string) error {
 	if browser, ok := os.LookupEnv("BROWSER"); ok {
 		args, err := shellquote.Split(browser)
@@ -53,30 +54,54 @@ func launch(url string) error {
 		}
 		return launcher.Start()
 	}
-	// fall back to system opener
+	// fall back to system URL opener
 	return browser.OpenURL(url)
 }
 
 func main() {
-	fs = flag.NewFlagSet("default", flag.ExitOnError)
+	fs = flag.NewFlagSet("bang", flag.ExitOnError)
 	loadConfig()
 	loadFlags(fs)
 
+	// check for special subcommands
+	switch fs.Arg(0) {
+	case "list":
+		fmt.Println(listBangs(Bangs))
+		os.Exit(0)
+	case "help":
+		fs.Usage()
+		os.Exit(0)
+	}
+
+	// check for bang but not enough args
 	if len(fs.Args()) < 2 {
 		fmt.Fprintln(os.Stderr, "not enough args")
+		fs.Usage()
 		os.Exit(1)
 	}
 
+	// lookup bang
 	if bang, ok := Bangs[fs.Arg(0)]; ok {
-		terms := fs.Args()
-		q := bang.URL(url.QueryEscape(strings.Join(terms[1:], " ")))
+		var q string
+		if fs.Arg(1) == "-" {
+			// TODO: read from os.Stdin
+			in, _ := os.Stdin.Stat()
+			interactive := ((in.Mode() & os.ModeCharDevice) != 0)
+			if !interactive {
+				bytes, _ := ioutil.ReadAll(os.Stdin)
+				q = strings.TrimSpace(string(bytes))
+			}
+		} else {
+			q = strings.Join(fs.Args()[1:], " ")
+		}
+		url := bang.URL(q)
 
 		if *flagURLOnly {
-			fmt.Fprintln(os.Stdout, q)
+			fmt.Fprintln(os.Stdout, url)
 			os.Exit(0)
 		}
 
-		err := launch(q)
+		err := launch(url)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)

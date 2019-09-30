@@ -1,6 +1,6 @@
 GOFMT_FILES?=$$(find . -name '*.go')
 
-default: build
+default: fmt build
 
 fmt:
 	@echo "--> Formatting source files"
@@ -8,6 +8,7 @@ fmt:
 
 fmt-json:
 	@echo "--> Formatting JSON file"
+	@jq type bangs.json >/dev/null
 	jq -SM . bangs.json | awk 'BEGIN{RS="";getline<"-";print>ARGV[1]}' bangs.json
 
 build: fmt
