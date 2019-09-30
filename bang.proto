@@ -1,0 +1,19 @@
+syntax = "proto3";
+package bang;
+
+option go_package = "github.com/travis-g/bang";
+
+message Bang {
+	string name = 1;
+	string description = 2;
+	string format = 3;
+	repeated string aliases = 4;
+
+	enum SubstituteType {
+		ESCAPED = 0;
+		UNESCAPED = 1;
+		ENCODED = 2;
+	}
+
+	SubstituteType substitute_type = 5;
+}
