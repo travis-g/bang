@@ -4,7 +4,9 @@ import (
 	"bytes"
 	"fmt"
 	"net/url"
+	"sort"
 	"strings"
+	"text/template"
 )
 
 // SliceToMap returns a map of Bangs based on the input slice's Bangs' names.
@@ -28,6 +30,8 @@ func MapToNamedBangs(bangs map[string]Bang) (slice []Bang) {
 }
 
 const symbol = "{{{s}}}"
+const bangTemplate = `{{.Name}} - {{.Description}}
+`
 
 // URL returns the direct query URL for a Bang.
 func (b *Bang) URL(q string) string {
@@ -42,9 +46,16 @@ func (b *Bang) URL(q string) string {
 var Bangs = map[string]Bang{}
 
 func listBangs(bangs map[string]Bang) string {
+	list := MapToNamedBangs(bangs)
+	sort.SliceStable(list, func(i, j int) bool {
+		return list[i].Name < list[j].Name
+	})
+	tmpl, _ := template.New("output").Funcs(template.FuncMap{
+		"trim": strings.TrimSpace,
+	}).Parse(bangTemplate)
 	var buf bytes.Buffer
-	for key, bang := range bangs {
-		fmt.Fprintf(&buf, "%s - %s\n", key, bang.Description)
+	for _, bang := range list {
+		tmpl.Execute(&buf, bang)
 	}
 	return strings.TrimSpace(buf.String())
 }
