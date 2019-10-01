@@ -7,14 +7,24 @@ import (
 	"strings"
 )
 
-// A Bang is a single registered search shortcut.
-type Bang struct {
-	ID          string `json:"id" mapstructure:"id"`
-	Description string `json:"description" mapstructure:"description"`
-	Format      string `json:"format" mapstructure:"format"`
+// SliceToMap returns a map of Bangs based on the input slice's Bangs' names.
+func SliceToMap(slice []Bang) (bangs map[string]Bang) {
+	bangs = map[string]Bang{}
+	for _, bang := range slice {
+		bangs[bang.Name] = bang
+	}
+	return
+}
 
-	// If true, queries will be passed without URL encoding/query escaping
-	Unescaped bool `json:"unescaped,omitempty" mapstructure:"unescaped"`
+// MapToNamedBangs returns a slice of Bangs with their names set according to
+// keys from an input map.
+func MapToNamedBangs(bangs map[string]Bang) (slice []Bang) {
+	slice = []Bang{}
+	for key, bang := range bangs {
+		bang.Name = key
+		slice = append(slice, bang)
+	}
+	return
 }
 
 const symbol = "{{{s}}}"

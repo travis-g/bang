@@ -1,6 +1,10 @@
-GOFMT_FILES?=$$(find . -name '*.go')
+GOFMT_FILES?=$$(find . -name '*.go' | grep -v pb.go)
 
-default: fmt build
+default: protoc fmt build
+
+protoc:
+	@echo "--> Compiling protobufs"
+	protoc *.proto --go_out=plugins=grpc,paths=source_relative:.
 
 fmt:
 	@echo "--> Formatting source files"
@@ -9,10 +13,10 @@ fmt:
 fmt-json:
 	@echo "--> Formatting JSON file"
 	@jq type bangs.json >/dev/null
-	jq -SM . bangs.json | awk 'BEGIN{RS="";getline<"-";print>ARGV[1]}' bangs.json
+	jq -SM '.' bangs.json | awk 'BEGIN{RS="";getline<"-";print>ARGV[1]}' bangs.json
 
-build: fmt
+build: protoc fmt
 	@echo "--> Building"
 	go build -ldflags="-s -w"
 
-.PHONY: default build fmt fmt-json
+.PHONY: default build protoc fmt fmt-json
