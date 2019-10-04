@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"net/url"
 	"sort"
@@ -35,10 +36,20 @@ const bangTemplate = `{{.Name}} - {{.Description}}
 
 // URL returns the direct query URL for a Bang.
 func (b *Bang) URL(q string) string {
-	if !b.Unescaped {
-		q = url.QueryEscape(q)
+	fmt.Println(b)
+	b.EscapeMethod = Bang_PATH_ESCAPE
+	str, _ := json.Marshal(b)
+	fmt.Println(string(str))
+	var s string
+	switch b.GetEscapeMethod() {
+	case Bang_QUERY_ESCAPE:
+		s = url.QueryEscape(q)
+	case Bang_PATH_ESCAPE:
+		s = url.PathEscape(q)
+	case Bang_PASS_THROUGH:
+		s = q
 	}
-	return fmt.Sprint(strings.Replace(b.Format, symbol, q, 1))
+	return fmt.Sprint(strings.Replace(b.GetFormat(), symbol, s, 1))
 }
 
 // Bangs is the registration list of all Bangs. We use a map[string] here for

@@ -82,6 +82,7 @@ func main() {
 
 	// lookup bang
 	if bang, ok := Bangs[fs.Arg(0)]; ok {
+		fmt.Println(bang)
 		var q string
 		if fs.Arg(1) == "-" {
 			// TODO: read from os.Stdin

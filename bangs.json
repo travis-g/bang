@@ -85,8 +85,8 @@
   },
   "imgops": {
     "description": "Image Operations Meta-tool",
-    "format": "https://imgops.com/{{{s}}}",
-    "unescaped": true
+	"format": "https://imgops.com/{{{s}}}",
+	"escape_method": 1
   },
   "itch": {
     "description": "itch.io",
