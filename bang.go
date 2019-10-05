@@ -10,6 +10,15 @@ import (
 	"text/template"
 )
 
+type Bang struct {
+	Name        string `json:"name"`
+	Format      string `json:"format"`
+	Description string `json:"description"`
+
+	PassThrough bool `json:"pass_through,omitempty"`
+	PathEscape  bool `json:"path_escape,omitempty"`
+}
+
 // SliceToMap returns a map of Bangs based on the input slice's Bangs' names.
 func SliceToMap(slice []Bang) (bangs map[string]Bang) {
 	bangs = map[string]Bang{}
@@ -36,20 +45,18 @@ const bangTemplate = `{{.Name}} - {{.Description}}
 
 // URL returns the direct query URL for a Bang.
 func (b *Bang) URL(q string) string {
-	fmt.Println(b)
-	b.EscapeMethod = Bang_PATH_ESCAPE
 	str, _ := json.Marshal(b)
 	fmt.Println(string(str))
 	var s string
-	switch b.GetEscapeMethod() {
-	case Bang_QUERY_ESCAPE:
-		s = url.QueryEscape(q)
-	case Bang_PATH_ESCAPE:
-		s = url.PathEscape(q)
-	case Bang_PASS_THROUGH:
+	switch {
+	case b.PassThrough:
 		s = q
+	case b.PathEscape:
+		s = url.PathEscape(q)
+	default:
+		s = url.QueryEscape(q)
 	}
-	return fmt.Sprint(strings.Replace(b.GetFormat(), symbol, s, 1))
+	return fmt.Sprint(strings.Replace(b.Format, symbol, s, 1))
 }
 
 // Bangs is the registration list of all Bangs. We use a map[string] here for

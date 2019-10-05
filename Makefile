@@ -1,6 +1,6 @@
 GOFMT_FILES?=$$(find . -name '*.go' | grep -v pb.go)
 
-default: protoc fmt build
+default: fmt build
 
 protoc:
 	@echo "--> Compiling protobufs"
@@ -15,7 +15,7 @@ fmt-json:
 	@jq type bangs.json >/dev/null
 	jq -SM '.' bangs.json | awk 'BEGIN{RS="";getline<"-";print>ARGV[1]}' bangs.json
 
-build: protoc fmt
+build: fmt
 	@echo "--> Building"
 	go build -ldflags="-s -w"
 

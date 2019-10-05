@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
 	"io/ioutil"
@@ -20,8 +21,8 @@ var (
 
 func loadConfig() {
 	viper.SetConfigName("bangs")
-	viper.AddConfigPath("$HOME/.config/bangs/")
-	viper.AddConfigPath("$HOME/.bangs")
+	// viper.AddConfigPath("$HOME/.config/bangs/")
+	// viper.AddConfigPath("$HOME/.bangs")
 	viper.AddConfigPath(".")
 	err := viper.ReadInConfig()
 	if err != nil {
@@ -82,7 +83,6 @@ func main() {
 
 	// lookup bang
 	if bang, ok := Bangs[fs.Arg(0)]; ok {
-		fmt.Println(bang)
 		var q string
 		if fs.Arg(1) == "-" {
 			// TODO: read from os.Stdin
@@ -95,6 +95,8 @@ func main() {
 		} else {
 			q = strings.Join(fs.Args()[1:], " ")
 		}
+		str, _ := json.Marshal(bang)
+		fmt.Println(string(str))
 		url := bang.URL(q)
 
 		if *flagURLOnly {
