@@ -6,6 +6,10 @@ message Bang {
 	string format = 2;
 	string description = 3;
 
-	bool pass_through = 4;
-	bool path_escape = 5;
+	enum EscapeMethod {
+		QUERY_ESCAPE = 0;
+		PASS_THROUGH = 1;
+		PATH_ESCAPE = 2;
+	}
+	EscapeMethod escape_method = 4;
 }

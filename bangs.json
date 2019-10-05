@@ -59,6 +59,10 @@
     "description": "GitHub",
     "format": "https://github.com/search?q={{{s}}}"
   },
+  "godoc": {
+    "description": "GoDoc",
+    "format": "https://godoc.org/{{{s}}}"
+  },
   "google": {
     "description": "Google",
     "format": "https://www.google.com/search?q={{{s}}}"
@@ -85,8 +89,8 @@
   },
   "imgops": {
     "description": "Image Operations Meta-tool",
-    "format": "https://imgops.com/{{{s}}}",
-    "pass_through": true
+    "escape_method": 1,
+    "format": "https://imgops.com/{{{s}}}"
   },
   "itch": {
     "description": "itch.io",

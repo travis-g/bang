@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -9,6 +10,7 @@ import (
 	"os/exec"
 	"strings"
 
+	"github.com/golang/protobuf/jsonpb"
 	"github.com/kballard/go-shellquote"
 	"github.com/pkg/browser"
 	"github.com/spf13/viper"
@@ -21,16 +23,25 @@ var (
 
 func loadConfig() {
 	viper.SetConfigName("bangs")
-	// viper.AddConfigPath("$HOME/.config/bangs/")
-	// viper.AddConfigPath("$HOME/.bangs")
+	viper.AddConfigPath("$HOME/.config/bangs/")
 	viper.AddConfigPath(".")
 	err := viper.ReadInConfig()
 	if err != nil {
-		panic(fmt.Errorf("fatal error config file: %s", err))
+		panic(fmt.Errorf("fatal error in config file: %s", err))
 	}
-	err = viper.Unmarshal(&Bangs)
-	if err != nil {
-		panic(fmt.Errorf("fatal error config file: %s", err))
+	// Unmarshal each key of config file as a proto.Message
+	for key, i := range viper.AllSettings() {
+		jsonBytes, err := json.Marshal(i)
+		if err != nil {
+			panic(fmt.Errorf("fatal error in config file: %s", err))
+		}
+		buf := bytes.NewReader(jsonBytes)
+		var bang Bang
+		if jsonpb.Unmarshal(buf, &bang) != nil {
+			panic(fmt.Errorf("fatal error in config file: %s", err))
+		}
+		bang.Name = key
+		Bangs[key] = bang
 	}
 }
 
@@ -95,8 +106,6 @@ func main() {
 		} else {
 			q = strings.Join(fs.Args()[1:], " ")
 		}
-		str, _ := json.Marshal(bang)
-		fmt.Println(string(str))
 		url := bang.URL(q)
 
 		if *flagURLOnly {

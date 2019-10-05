@@ -2,22 +2,12 @@ package main
 
 import (
 	"bytes"
-	"encoding/json"
 	"fmt"
 	"net/url"
 	"sort"
 	"strings"
 	"text/template"
 )
-
-type Bang struct {
-	Name        string `json:"name"`
-	Format      string `json:"format"`
-	Description string `json:"description"`
-
-	PassThrough bool `json:"pass_through,omitempty"`
-	PathEscape  bool `json:"path_escape,omitempty"`
-}
 
 // SliceToMap returns a map of Bangs based on the input slice's Bangs' names.
 func SliceToMap(slice []Bang) (bangs map[string]Bang) {
@@ -45,15 +35,13 @@ const bangTemplate = `{{.Name}} - {{.Description}}
 
 // URL returns the direct query URL for a Bang.
 func (b *Bang) URL(q string) string {
-	str, _ := json.Marshal(b)
-	fmt.Println(string(str))
 	var s string
-	switch {
-	case b.PassThrough:
+	switch b.GetEscapeMethod() {
+	case Bang_PASS_THROUGH:
 		s = q
-	case b.PathEscape:
+	case Bang_PATH_ESCAPE:
 		s = url.PathEscape(q)
-	default:
+	case Bang_QUERY_ESCAPE:
 		s = url.QueryEscape(q)
 	}
 	return fmt.Sprint(strings.Replace(b.Format, symbol, s, 1))
