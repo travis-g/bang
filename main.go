@@ -29,7 +29,8 @@ func loadConfig() {
 	if err != nil {
 		panic(fmt.Errorf("fatal error in config file: %s", err))
 	}
-	// Unmarshal each key of config file as a proto.Message
+	// Unmarshal each key of config file as a proto.Message then stick it back
+	// into the global map of named Bangs
 	for key, i := range viper.AllSettings() {
 		jsonBytes, err := json.Marshal(i)
 		if err != nil {
