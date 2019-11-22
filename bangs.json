@@ -159,15 +159,15 @@
   },
   "yandeximages": {
     "description": "Yandex.Images",
-    "format": "https://yandex.com/images/search?text=cats"
+    "format": "https://yandex.com/images/search?text={{{s}}}"
   },
   "yandeximg": {
     "description": "Yandex.Images",
-    "format": "https://yandex.com/images/search?text=cats"
+    "format": "https://yandex.com/images/search?text={{{s}}}"
   },
   "yi": {
     "description": "Yandex.Images",
-    "format": "https://yandex.com/images/search?text=cats"
+    "format": "https://yandex.com/images/search?text={{{s}}}"
   },
   "youtube": {
     "description": "YouTube",
