@@ -117,6 +117,11 @@
     "description": "Google Reverse Image Search",
     "format": "http://www.google.com/searchbyimage?image_url={{{s}}}"
   },
+  "sourcegraph": {
+    "description": "Sourcegraph",
+    "escape_method": 1,
+    "format": "https://sourcegraph.com/{{{s}}}",
+  },
   "steam": {
     "description": "Steam",
     "format": "https://store.steampowered.com/search/?term={{{s}}}"
