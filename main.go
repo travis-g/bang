@@ -23,7 +23,8 @@ var (
 
 func loadConfig() {
 	viper.SetConfigName("bangs")
-	viper.AddConfigPath("$HOME/.config/bangs/")
+	viper.AddConfigPath("$HOME/.config/bang/")
+	viper.AddConfigPath("$HOME/.config/")
 	viper.AddConfigPath(".")
 	err := viper.ReadInConfig()
 	if err != nil {
