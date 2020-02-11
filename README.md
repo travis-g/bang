@@ -26,9 +26,9 @@ The CLI looks for a config file named `bangs.(json|yml|yaml|toml|hcl)` in the fo
 
 - `description` `(string: <req>)` is a friendly description for the Bang.
 - `escape_method` `(int: 0)` defines how the query is escaped prior to it being substituted within the Bang's `format`:
-  - `0` - Escapes with `url.QueryEscape`: `cat pictures` &Rarr; `cat+pictures`. This is the default method.
-  - `1` - Pass-through without escaping: `cat pictures` &Rarr; `cat pictures`
-  - `2` - Escapes with `url.PathEscape`: `cat pictures` &Rarr; `cat%20pictures`
+  - `0` - Escapes with `url.QueryEscape`: `cat pictures` &rArr; `cat+pictures`. This is the default method.
+  - `1` - Pass-through without escaping: `cat pictures` &rArr; `cat pictures`
+  - `2` - Escapes with `url.PathEscape`: `cat pictures` &rArr; `cat%20pictures`
 - `format` `(string: <req>)` defines the template used to create the Bang's resulting query string. Use `{{{s}}}` to denote where the query should be substituted.
 
 See the [`bang.proto`](bang.proto) file for the Bang object format.
