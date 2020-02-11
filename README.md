@@ -1,20 +1,36 @@
 # bang
 
-CLI for quick browser launching, heavily inspired by DuckDuckGo's [!bangs][ddg-bangs].
+Browser launcher, heavily inspired by DuckDuckGo's [!bangs][ddg-bangs].
 
-Queries can also be piped through Stdin.
+Search for cat pictures on Google Images:
+
+```console
+$ bang gi cat pictures
+# opens a browser to 'cat pictures' on Google Images
+```
+
+Queries can also be piped through stdin if a hyphen is passed in as the argument, and the `-url` flag can be used to print the bang's URL to stdout rather than launching a browser.
 
 ```console
 $ echo "cat pictures" | bang -url gi -
 https://www.google.com/search?tbm=isch&q=cat+pictures
+$ echo "reddit cat pictures" | bang -url -
+https://www.reddit.com/search?q=cat+pictures
 ```
 
-Supports launching custom programs as subshells using the `BROWSER` environment variable:
+The system's URL opener will be used by default, but if set, the `BROWSER` environment variable will be executed with the chosen bang's URL passed as the final argument.
 
-```console
-$ export BROWSER="chromium-browser --incognito"
-$ bang gi cat pictures
-# open the search for cat pictures in an incognito Chromium session
-```
+## Config
+
+The CLI looks for a config file named `bangs.(json|yml|yaml|toml|hcl)` in the following locations, in order: `~/.config/bang/`, `~/.config/`, `.` (current directory). Each key of the config file should be the unique `name` of a Bang, with the following properties:
+
+- `description` `(string: <req>)` is a friendly description for the Bang.
+- `escape_method` `(int: 0)` defines how the query is escaped prior to it being substituted within the Bang's `format`:
+  - `0` - Escapes with `url.QueryEscape`: `cat pictures` &Rarr; `cat+pictures`. This is the default method.
+  - `1` - Pass-through without escaping: `cat pictures` &Rarr; `cat pictures`
+  - `2` - Escapes with `url.PathEscape`: `cat pictures` &Rarr; `cat%20pictures`
+- `format` `(string: <req>)` defines the template used to create the Bang's resulting query string. Use `{{{s}}}` to denote where the query should be substituted.
+
+See the [`bang.proto`](bang.proto) file for the Bang object format.
 
 [ddg-bangs]: https://duckduckgo.com/bang
