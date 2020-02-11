@@ -2,13 +2,24 @@ syntax = "proto3";
 package main;
 
 message Bang {
+	// Name of the Bang, which is used as its ID.
 	string name = 1;
+
+	// Format of the Bang, where '{{{s}}}' will be substituted with the escaped
+	// query string.
 	string format = 2;
+
+	// Description is a summary of the Bang.
 	string description = 3;
 
+	// EscapeMethod is the type of escaping to be used when escaping non-URL
+	// safe characters, like spaces and quotes.
 	enum EscapeMethod {
+		// Escapes the input with url.QueryEscape: "cat pictures" => "cat+pictures"
 		QUERY_ESCAPE = 0;
+		// Does no escaping: "cat pictures" => "cat pictures"
 		PASS_THROUGH = 1;
+		// Escapes the input with url.PathEscape: "cat pictures" => "cat%20pictures"
 		PATH_ESCAPE = 2;
 	}
 	EscapeMethod escape_method = 4;

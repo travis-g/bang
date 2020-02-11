@@ -20,12 +20,17 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
+// EscapeMethod is the type of escaping to be used when escaping non-URL
+// safe characters, like spaces and quotes.
 type Bang_EscapeMethod int32
 
 const (
+	// Escapes the input with url.QueryEscape: "cat pictures" => "cat+pictures"
 	Bang_QUERY_ESCAPE Bang_EscapeMethod = 0
+	// Does no escaping: "cat pictures" => "cat pictures"
 	Bang_PASS_THROUGH Bang_EscapeMethod = 1
-	Bang_PATH_ESCAPE  Bang_EscapeMethod = 2
+	// Escapes the input with url.PathEscape: "cat pictures" => "cat%20pictures"
+	Bang_PATH_ESCAPE Bang_EscapeMethod = 2
 )
 
 var Bang_EscapeMethod_name = map[int32]string{
@@ -49,8 +54,12 @@ func (Bang_EscapeMethod) EnumDescriptor() ([]byte, []int) {
 }
 
 type Bang struct {
-	Name                 string            `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Format               string            `protobuf:"bytes,2,opt,name=format,proto3" json:"format,omitempty"`
+	// Name of the Bang, which is used as its ID.
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Format of the Bang, where '{{{s}}}' will be substituted with the escaped
+	// query string.
+	Format string `protobuf:"bytes,2,opt,name=format,proto3" json:"format,omitempty"`
+	// Description is a summary of the Bang.
 	Description          string            `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	EscapeMethod         Bang_EscapeMethod `protobuf:"varint,4,opt,name=escape_method,json=escapeMethod,proto3,enum=main.Bang_EscapeMethod" json:"escape_method,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
