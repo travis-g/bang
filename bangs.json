@@ -11,6 +11,10 @@
     "description": "Amazon.com",
     "format": "https://www.amazon.com/s/?tag=duc0c-20&url=search-alias%3Daps&field-keywords={{{s}}}"
   },
+  "archwiki": {
+    "description": "ArchWiki",
+    "format": "https://wiki.archlinux.org/index.php?title=Special%3ASearch&search={{{s}}}"
+  },
   "b": {
     "description": "Bing",
     "format": "https://www.bing.com/search?q={{{s}}}"
@@ -97,6 +101,10 @@
     "description": "itch.io",
     "format": "https://itch.io/search?q={{{s}}}"
   },
+  "lexico": {
+    "description": "Lexico dictionary search",
+    "format": "https://www.lexico.com/en/definition/{{{s}}}"
+  },
   "picmonkey": {
     "description": "Picmonkey Image Editor",
     "format": "https://www.picmonkey.com/service?&_import={{{s}}}"
@@ -126,6 +134,10 @@
     "description": "Steam",
     "format": "https://store.steampowered.com/search/?term={{{s}}}"
   },
+  "subreddit": {
+    "description": "Reddit Subreddit",
+    "format": "https://www.reddit.com/r/{{{s}}}"
+  },
   "tvtropes": {
     "description": "TV Tropes",
     "format": "http://tvtropes.org/pmwiki/search_result.php?q={{{s}}}"
@@ -137,6 +149,10 @@
   "wa": {
     "description": "Wolfram|Alpha",
     "format": "https://www.wolframalpha.com/input/?i={{{s}}}"
+  },
+  "webster": {
+    "description": "Merriam-Webster Dictionary",
+    "format": "https://www.merriam-webster.com/dictionary/{{{s}}}"
   },
   "wiki": {
     "description": "WikiPedia",
