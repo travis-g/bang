@@ -22,4 +22,15 @@ fmt-json:
 .PHONY: build
 build: fmt
 	@echo "--> Building"
-	go build -ldflags="-s -w"
+	go build -ldflags="-s -w" ./...
+	go build -ldflags="-s -w" ./cmd/bang
+
+.PHONY: clean
+clean:
+	@echo "--> Cleaning"
+	rm -f bang bang.exe
+
+.PHONY: godoc
+godoc:
+	@echo "--> Serving GoDoc at http://localhost:8080/"
+	@godoc -http ":8080"

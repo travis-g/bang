@@ -1,5 +1,5 @@
 syntax = "proto3";
-package main;
+package bang;
 
 message Bang {
 	// Name of the Bang, which is used as its ID.

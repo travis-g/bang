@@ -1,4 +1,5 @@
-package main
+// Package bang implements browser-launching URL shortcuts.
+package bang
 
 import (
 	"bytes"
@@ -51,7 +52,8 @@ func (b *Bang) URL(q string) string {
 // faster lookups at runtime than digging through slices.
 var Bangs = map[string]Bang{}
 
-func listBangs(bangs map[string]Bang) string {
+// ListBangs enumerates the Bangs of a map of Bangs.
+func ListBangs(bangs map[string]Bang) string {
 	list := MapToNamedBangs(bangs)
 	sort.SliceStable(list, func(i, j int) bool {
 		return list[i].Name < list[j].Name

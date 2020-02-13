@@ -14,6 +14,7 @@ import (
 	"github.com/kballard/go-shellquote"
 	"github.com/pkg/browser"
 	"github.com/spf13/viper"
+	lib "github.com/travis-g/bang"
 )
 
 var (
@@ -90,12 +91,12 @@ func loadConfig() error {
 			return fmt.Errorf("fatal error in config file: %s", err)
 		}
 		buf := bytes.NewReader(jsonBytes)
-		var bang Bang
+		var bang lib.Bang
 		if jsonpb.Unmarshal(buf, &bang) != nil {
 			return fmt.Errorf("fatal error in config file: %s", err)
 		}
 		bang.Name = key
-		Bangs[key] = bang
+		lib.Bangs[key] = bang
 	}
 	return nil
 }
@@ -138,7 +139,7 @@ func stdinToString() (string, error) {
 
 func run(args []string) (err error) {
 	// lookup bang
-	bang, ok := Bangs[args[0]]
+	bang, ok := lib.Bangs[args[0]]
 	if !ok {
 		return fmt.Errorf("not a configured bang: %s", args[0])
 	}
@@ -200,7 +201,7 @@ func main() {
 		}
 		args = strings.Split(q, " ")
 	case "list":
-		fmt.Println(listBangs(Bangs))
+		fmt.Println(lib.ListBangs(lib.Bangs))
 		os.Exit(0)
 	case "help":
 		fs.Usage()

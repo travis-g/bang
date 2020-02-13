@@ -20,6 +20,16 @@ https://www.reddit.com/search?q=cat+pictures
 
 The system's URL opener will be used by default, but if set, the `BROWSER` environment variable will be executed with the chosen bang's URL passed as the final argument.
 
+## Installation
+
+To get everything and install the CLI into your GOPATH:
+
+```sh
+go get -u github.com/travis-g/bang/...
+```
+
+The CLI is available from within `cmd/bang`.
+
 ## Config
 
 The CLI looks for a config file named `bangs.(json|yml|yaml|toml|hcl)` in the following locations, in order:
@@ -39,9 +49,9 @@ Each key of the config file should be the unique `name` of a Bang, with the foll
   - `2` - Escapes with `url.PathEscape`: `cat pictures` &rArr; `cat%20pictures`
 - `format` `(string: <req>)` defines the template used to create the Bang's resulting query string. Use `{{{s}}}` to denote where the query should be substituted.
 
-Example YAML entry for GoDoc:
+Example YAML config file entry for GoDoc:
 
-```json
+```yaml
 godoc:
   # try it: bang godoc github.com/travis-g/bang
   description: GoDoc
