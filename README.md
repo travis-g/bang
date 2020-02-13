@@ -24,7 +24,7 @@ The system's URL opener will be used by default, but if set, the `BROWSER` envir
 
 The CLI looks for a config file named `bangs.(json|yml|yaml|toml|hcl)` in the following locations, in order:
 
-```
+```plain
 ~/.config/bang/
 ~/.config/
 ./ (current directory)
