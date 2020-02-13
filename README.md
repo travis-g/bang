@@ -1,11 +1,13 @@
 # bang
 
+[![GoDoc](https://godoc.org/github.com/travis-g/bang?status.svg)][godoc]
+
 Browser launcher, heavily inspired by DuckDuckGo's [!bangs][ddg-bangs].
 
 Search for cat pictures on Google Images:
 
-```console
-$ bang gi cat pictures
+```sh
+bang gi cat pictures
 # opens a browser to 'cat pictures' on Google Images
 ```
 
@@ -62,3 +64,4 @@ godoc:
 See the [`bang.proto`](bang.proto) file for the Bang object format.
 
 [ddg-bangs]: https://duckduckgo.com/bang
+[godoc]: https://godoc.org/github.com/travis-g/bang
