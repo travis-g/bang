@@ -6,7 +6,9 @@ default: fmt build
 .PHONY: protoc
 protoc:
 	@echo "--> Compiling protobufs"
-	protoc *.proto --go_out=plugins=grpc,paths=source_relative:.
+	protoc *.proto -I=. -I=$(GOPATH)/src/github.com/gogo/protobuf/protobuf \
+				-I=$(GOPATH)/src \
+				--gogo_out=paths=source_relative:.
 
 .PHONY: fmt
 fmt:

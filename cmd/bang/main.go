@@ -18,8 +18,9 @@ import (
 )
 
 var (
-	fs          *flag.FlagSet
-	flagURLOnly *bool
+	fs            *flag.FlagSet
+	flagURLOnly   bool
+	flagConfigDir string
 )
 
 var helpText = strings.TrimSpace(`
@@ -31,9 +32,9 @@ Usage:  bang [OPTIONS] [BANG] [QUERY]...
         bang list
         bang help
 
-Bangs can be configured with any file type supported by Viper
-(github.com/spf13/viper) but must be named "bangs", ex. "bangs.json". The CLI
-will look for a "bangs" config file in the following directories, in order:
+Bangs can be configured in YAML, JSON, TOML, HCL, and several other types, but
+must be named "bangs", ex. "bangs.json". The CLI will look for a "bangs" config
+file in the following directories, in order:
 
     ~/.config/bang/
     ~/.config/
@@ -102,7 +103,8 @@ func loadConfig() error {
 }
 
 func loadFlags(fs *flag.FlagSet) error {
-	flagURLOnly = fs.Bool("url", false, "output URL only")
+	fs.BoolVar(&flagURLOnly, "url", false, "output URL only")
+	fs.StringVar(&flagConfigDir, "config", "", "config file directory")
 	return fs.Parse(os.Args[1:])
 }
 
@@ -154,7 +156,7 @@ func run(args []string) (err error) {
 
 	url := bang.URL(q)
 
-	if *flagURLOnly {
+	if flagURLOnly {
 		fmt.Fprintln(os.Stdout, url)
 		return
 	}

@@ -37,13 +37,16 @@ const bangTemplate = `{{.Name}} - {{.Description}}
 // URL returns the direct query URL for a Bang.
 func (b *Bang) URL(q string) string {
 	var s string
-	switch b.GetEscapeMethod() {
-	case Bang_PASS_THROUGH:
+	switch b.EscapeMethod {
+	case PASS_THROUGH:
 		s = q
-	case Bang_PATH_ESCAPE:
+	case PATH_ESCAPE:
 		s = url.PathEscape(q)
-	case Bang_QUERY_ESCAPE:
+	case QUERY_ESCAPE:
 		s = url.QueryEscape(q)
+	default:
+		// unreachable code
+		panic(b.EscapeMethod)
 	}
 	return fmt.Sprint(strings.Replace(b.Format, symbol, s, 1))
 }

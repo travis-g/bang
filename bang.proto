@@ -1,6 +1,14 @@
 syntax = "proto3";
 package bang;
 
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+option (gogoproto.marshaler_all) = true;
+option (gogoproto.sizer_all) = true;
+option (gogoproto.unmarshaler_all) = true;
+option (gogoproto.goproto_getters_all) = false;
+option (gogoproto.goproto_enum_prefix_all) = false;
+
 message Bang {
 	// Name of the Bang, which is used as its ID.
 	string name = 1;
@@ -22,5 +30,8 @@ message Bang {
 		// Escapes the input with url.PathEscape: "cat pictures" => "cat%20pictures"
 		PATH_ESCAPE = 2;
 	}
+
+	// EscapeMethod is the escape method to be used when substiting queries into
+	// the Bang's format.
 	EscapeMethod escape_method = 4;
 }
